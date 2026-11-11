@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nytebook — Book the night</title>
+<meta name="description" content="Book DJs, hypemen and MCs with escrow. Talent gets paid, hosts get who they booked. Both sides earn a reliability score.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07060b;--panel:#110f18;--line:#221e2e;--ink:#f4f1ff;--mut:#9b95ad;--mag:#ff2bd6;--vio:#7b5cff;--cy:#22e1ff;--ok:#3dffa8;--e:cubic-bezier(.2,.8,.2,1)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font:16px/1.55 Inter,system-ui,sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.mono{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+.wrap{width:min(1200px,100% - 48px);margin:0 auto}
+.grad{background:linear-gradient(90deg,var(--mag),var(--vio) 55%,var(--cy));-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* nav */
+nav{position:fixed;inset:0 0 auto;z-index:20;transition:background .4s,border-color .4s;border-bottom:1px solid transparent}
+nav.solid{background:rgba(7,6,11,.86);border-color:var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:72px}
+.logo{font:900 20px Unbounded,sans-serif;letter-spacing:-.02em;display:flex;align-items:center;gap:10px}
+.logo i{width:26px;height:26px;border-radius:50%;background:repeating-radial-gradient(circle,#111 0 2px,#1d1a26 2px 3px);box-shadow:0 0 0 2px var(--mag) inset,0 0 18px rgba(255,43,214,.5);display:inline-block}
+.links{display:flex;gap:28px;align-items:center;font-size:14px;color:var(--mut)}
+.links a:hover{color:var(--ink)}
+.pill{display:inline-flex;align-items:center;gap:8px;min-height:46px;padding:0 22px;border-radius:999px;font-weight:600;font-size:15px;transition:transform .3s var(--e),box-shadow .3s}
+.pill.p{background:linear-gradient(90deg,var(--mag),var(--vio));color:#fff;box-shadow:0 10px 30px -10px rgba(255,43,214,.7)}
+.pill.g{border:1px solid #3a3350;color:var(--ink)}
+.pill:hover{transform:translateY(-2px)}
+.links .pill{min-height:40px;padding:0 18px;color:#fff}
+
+/* hero */
+.hero{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden;padding:110px 0 120px}
+.hero .bg{position:absolute;inset:-4% 0 0;background:url(img/hero.jpg) center 60%/cover;transform:translate3d(0,var(--hy,0px),0) scale(1.06);will-change:transform}
+.hero .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(7,6,11,.96) 0%,rgba(7,6,11,.82) 42%,rgba(40,12,60,.45) 75%,rgba(7,6,11,.7)),linear-gradient(0deg,var(--bg) 0%,transparent 35%)}
+.hero .wrap{position:relative;z-index:1;isolation:isolate;display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:40px}
+.kick{color:var(--cy);margin-bottom:22px;opacity:0;transform:translateY(10px);transition:all .8s var(--e) .1s}
+h1{font:900 clamp(52px,7.4vw,112px)/.92 Unbounded,sans-serif;letter-spacing:-.04em}
+h1 .wd{display:inline-block;white-space:nowrap}
+h1 .ch{display:inline-block;opacity:0;transform:translateY(.5em);filter:blur(10px);transition:opacity .9s var(--e),transform .9s var(--e),filter .9s var(--e);transition-delay:calc(var(--i)*60ms + .2s)}
+h1 .l2{display:block;font-size:.42em;letter-spacing:-.02em;margin-top:.45em;opacity:0;transform:translateY(16px);transition:all 1s var(--e) 1.2s}
+.sub{max-width:520px;color:#cfc9de;font-size:18px;margin:26px 0 34px;opacity:0;transform:translateY(14px);transition:all 1s var(--e) 1.35s}
+.ctas{display:flex;gap:14px;flex-wrap:wrap;opacity:0;transform:translateY(14px);transition:all 1s var(--e) 1.5s}
+.on .kick,.on h1 .ch,.on h1 .l2,.on .sub,.on .ctas{opacity:1;transform:none;filter:none}
+.done h1 .ch{filter:none;transition:none}
+
+/* vinyl */
+.deck{position:relative;aspect-ratio:1;width:min(460px,100%);justify-self:center;opacity:0;transform:scale(.9) rotate(-8deg);transition:all 1.4s var(--e) .4s}
+.on .deck{opacity:1;transform:none}
+.rec{position:absolute;inset:0;border-radius:50%;background:repeating-radial-gradient(circle at 50% 50%,#0b0a10 0 1.5px,#17141f 1.5px 3px);box-shadow:0 30px 80px -20px rgba(123,92,255,.55),0 0 0 1px #2a2536,0 0 60px rgba(255,43,214,.18)}
+.disc{position:absolute;inset:0;border-radius:50%;animation:spin 1.8s linear infinite}
+.disc::before{content:"";position:absolute;inset:31%;border-radius:50%;background:radial-gradient(circle,#07060b 0 6%,transparent 6.5%),conic-gradient(from 0deg,var(--mag),var(--vio),var(--cy),var(--mag))}
+.disc::after{content:"NB";position:absolute;inset:0;display:grid;place-items:center;font:900 22px Unbounded;color:#fff;transform:translateY(-34px);text-shadow:0 2px 10px rgba(0,0,0,.5)}
+.sheen{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 210deg,transparent 0 20%,rgba(255,255,255,.10) 26%,transparent 32% 70%,rgba(255,255,255,.07) 76%,transparent 82%);pointer-events:none}
+.arm{position:absolute;right:-4%;top:-2%;width:14%;height:62%;transform-origin:50% 8%;transform:rotate(-28deg);transition:transform 1.6s var(--e) 1.6s}
+.on .arm{transform:rotate(6deg)}
+.arm::before{content:"";position:absolute;left:50%;top:0;width:34px;height:34px;margin-left:-17px;border-radius:50%;background:radial-gradient(circle,#3a3448 30%,#1b1824 32%);box-shadow:0 0 0 2px #2d2838}
+.arm::after{content:"";position:absolute;left:calc(50% - 3px);top:20px;width:6px;height:calc(100% - 20px);border-radius:3px;background:linear-gradient(#cfc9de,#777089);box-shadow:-10px 100% 0 -1px transparent}
+.arm b{position:absolute;bottom:-6px;left:calc(50% - 14px);width:28px;height:40px;border-radius:5px;background:#2b2638;border:1px solid #4a4360;transform:rotate(-18deg)}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* equaliser */
+.eq{position:absolute;left:0;right:0;bottom:0;height:90px;display:flex;align-items:flex-end;gap:6px;padding:0 24px;opacity:.55;pointer-events:none}
+.eq span{flex:1;height:100%;border-radius:4px 4px 0 0;background:linear-gradient(0deg,var(--vio),var(--mag));transform-origin:bottom;transform:scaleY(.15);animation:eq var(--t) ease-in-out var(--d) infinite alternate}
+@keyframes eq{0%{transform:scaleY(.12)}50%{transform:scaleY(var(--h))}100%{transform:scaleY(.3)}}
+
+/* ticker */
+.ticker{border-block:1px solid var(--line);padding:22px 0;overflow:hidden;background:#0a0910}
+.row{display:flex;width:max-content;gap:0;animation:tk 38s linear infinite}
+.row.r{animation-direction:reverse;margin-top:10px;animation-duration:44s}
+.row span{font:700 clamp(20px,2.4vw,30px) Unbounded;letter-spacing:-.02em;color:#3d3650;white-space:nowrap;padding:0 26px;display:flex;align-items:center;gap:26px}
+.row span::after{content:"✕";color:var(--mag);font-size:.6em}
+.row.r span{color:#2f2a40}
+.ticker:hover .row{animation-play-state:paused}
+@keyframes tk{to{transform:translateX(-50%)}}
+
+/* sections */
+section{padding:130px 0}
+.eyebrow{color:var(--mag);margin-bottom:16px}
+h2{font:900 clamp(34px,4.6vw,64px)/1 Unbounded;letter-spacing:-.035em;max-width:900px}
+.lead{color:var(--mut);font-size:18px;max-width:560px;margin-top:20px}
+.rv{opacity:0;transform:translateY(34px);transition:opacity 1s var(--e),transform 1s var(--e);transition-delay:calc(var(--d,0)*80ms)}
+.rv.in{opacity:1;transform:none}
+
+/* how */
+.how{position:relative}
+.steps{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:28px;margin-top:80px}
+.rail{position:absolute;left:12.5%;right:12.5%;top:31px;height:2px;background:#221e2e;border-radius:2px}
+.rail i{position:absolute;inset:0;background:linear-gradient(90deg,var(--mag),var(--vio),var(--cy));transform-origin:left;transform:scaleX(var(--p,0));box-shadow:0 0 18px rgba(255,43,214,.6)}
+.step{position:relative;text-align:center}
+.node{width:64px;height:64px;margin:0 auto 26px;border-radius:50%;display:grid;place-items:center;background:var(--panel);border:1px solid #2a2536;font:900 18px Unbounded;color:var(--mut);transition:all .6s var(--e);position:relative;z-index:1}
+.step.lit .node{color:#fff;background:linear-gradient(135deg,var(--mag),var(--vio));border-color:transparent;box-shadow:0 0 0 6px rgba(255,43,214,.12),0 0 34px rgba(255,43,214,.55)}
+.step h3{font:700 19px Unbounded;letter-spacing:-.02em;margin-bottom:10px}
+.step p{color:var(--mut);font-size:15px;max-width:240px;margin:0 auto}
+.step .mono{color:var(--cy);display:block;margin-bottom:8px;font-size:11px}
+
+/* score */
+.score{background:radial-gradient(60% 50% at 80% 30%,rgba(123,92,255,.16),transparent),var(--bg)}
+.cards{display:grid;grid-template-columns:1.2fr .8fr;gap:28px;margin-top:70px;align-items:stretch}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:28px;padding:30px;position:relative;overflow:hidden}
+.prof{display:grid;grid-template-columns:220px 1fr;gap:30px;align-items:center}
+.prof .ph{aspect-ratio:4/5;border-radius:20px;background:url(img/dj.jpg) center 20%/cover;position:relative}
+.prof .ph::after{content:"VERIFIED";position:absolute;left:12px;bottom:12px;padding:6px 10px;border-radius:999px;background:rgba(7,6,11,.75);font:500 10px 'JetBrains Mono';letter-spacing:.14em;color:var(--ok)}
+.who{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:22px}
+.who h3{font:900 26px Unbounded;letter-spacing:-.03em}
+.who p{color:var(--mut);font-size:14px}
+.gauge{position:relative;width:118px;height:118px;flex:none}
+.gauge svg{width:100%;height:100%;transform:rotate(-90deg)}
+.gauge circle{fill:none;stroke-width:9}
+.gauge .t{stroke:#231f2f}
+.gauge .v{stroke:url(#gg);stroke-linecap:round;stroke-dasharray:327;stroke-dashoffset:327;transition:stroke-dashoffset 2s var(--e)}
+.gauge b{position:absolute;inset:0;display:grid;place-items:center;font:900 32px Unbounded}
+.gauge small{position:absolute;bottom:22px;left:0;right:0;text-align:center;font:500 9px 'JetBrains Mono';letter-spacing:.14em;color:var(--mut)}
+.bars{display:grid;gap:16px}
+.bar .lab{display:flex;justify-content:space-between;font-size:14px;margin-bottom:8px;color:#d9d4e6}
+.bar .lab span:last-child{font-family:'JetBrains Mono';color:var(--ok)}
+.bar .tr{height:8px;border-radius:8px;background:#231f2f;overflow:hidden}
+.bar .tr i{display:block;height:100%;border-radius:8px;background:linear-gradient(90deg,var(--vio),var(--ok));transform-origin:left;transform:scaleX(0);transition:transform 1.6s var(--e);transition-delay:calc(var(--d)*150ms + .3s)}
+.in .gauge .v{stroke-dashoffset:var(--off)}
+.in .bar .tr i{transform:scaleX(var(--w))}
+.host .img{height:180px;border-radius:18px;background:url(img/lounge.jpg) center 55%/cover;margin-bottom:22px}
+.host h3{font:900 22px Unbounded;letter-spacing:-.02em}
+.host p{color:var(--mut);font-size:14px;margin:4px 0 20px}
+.chip{display:inline-flex;gap:8px;align-items:center;padding:8px 12px;border-radius:999px;border:1px solid #2a2536;font-size:13px;margin:0 6px 8px 0}
+.chip i{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 10px var(--ok)}
+
+/* sides */
+.sides{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:70px}
+.side{padding:40px;border-radius:28px;background:linear-gradient(160deg,#161320,#0d0b13);border:1px solid var(--line);transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .5s var(--e)}
+.side h3{font:900 30px Unbounded;letter-spacing:-.03em;margin:10px 0 22px}
+.side li{list-style:none;padding:14px 0;border-top:1px solid var(--line);color:#d9d4e6;display:flex;gap:14px}
+.side li::before{content:"→";color:var(--mag);font-weight:700}
+.side .mono{color:var(--cy)}
+
+/* cta */
+.cta{text-align:center;padding:150px 0 120px;position:relative;overflow:hidden}
+.cta::before{content:"";position:absolute;inset:auto -10% -40% -10%;height:80%;background:radial-gradient(50% 50% at 50% 50%,rgba(255,43,214,.22),transparent 70%)}
+.cta h2{margin:0 auto;font-size:clamp(44px,8vw,120px)}
+.cta .lead{margin:24px auto 40px}
+.cta .ctas{justify-content:center;opacity:1;transform:none}
+footer{border-top:1px solid var(--line);padding:30px 0;color:var(--mut);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.wa{position:fixed;right:18px;bottom:18px;z-index:30;width:54px;height:54px;border-radius:50%;background:#25d366;display:grid;place-items:center;box-shadow:0 10px 30px -8px rgba(37,211,102,.6)}
+.wa svg{width:28px;height:28px;fill:#fff}
+
+/* low fx + reduced motion */
+.lowfx .eq{display:none}
+.lowfx .rec{box-shadow:0 0 0 1px #2a2536}
+.lowfx .disc{animation-duration:3.6s}
+.lowfx .row{animation-duration:70s}
+.lowfx h1 .ch{filter:none}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.kick,h1 .ch,h1 .l2,.sub,.ctas,.deck,.rv{opacity:1!important;transform:none!important;filter:none!important}.arm{transform:rotate(6deg)!important}}
+
+/* phone */
+@media (max-width:860px){
+  .links a:not(.pill){display:none}
+  .hero{padding:96px 0 110px;align-items:flex-end}
+  .hero .wrap{grid-template-columns:1fr}
+  .deck{position:absolute;width:64vw;right:-12vw;bottom:calc(100% - 10px);top:auto;z-index:-1}
+  .on .deck{opacity:.75}
+  h1{font-size:13.2vw}
+  .sub{font-size:16px}
+  .eq{height:60px;gap:4px;padding:0 12px}
+  section{padding:90px 0}
+  .steps{grid-template-columns:1fr;gap:34px;margin-top:50px}
+  .rail{left:31px;right:auto;top:32px;bottom:32px;width:2px;height:auto}
+  .rail i{transform-origin:top;transform:scaleY(var(--p,0))}
+  .step{text-align:left;display:grid;grid-template-columns:64px 1fr;gap:20px;align-items:start}
+  .node{margin:0}
+  .step p{margin:0}
+  .cards,.sides{grid-template-columns:1fr}
+  .prof{grid-template-columns:1fr}
+  .prof .ph{aspect-ratio:16/11}
+  .side{padding:28px}
+  .cta{padding:110px 0 90px}
+}
+</style>
+</head>
+<body>
+<nav id="nav"><div class="wrap">
+  <a class="logo" href="#top"><i></i>Nytebook</a>
+  <div class="links"><a href="#how">How it works</a><a href="#score">Reliability score</a><a href="#sides">Talent &amp; hosts</a><a class="pill p" href="https://nightlife-poll.vercel.app" target="_blank" rel="noopener">Early access</a></div>
+</div></nav>
+
+<header class="hero" id="top">
+  <div class="bg" id="hbg"></div>
+  <div class="wrap">
+    <div>
+      <div class="kick mono">Lagos · Abuja · Port Harcourt — then the world</div>
+      <h1 id="h1" aria-label="Book the night. Get paid for it."><span class="l1">BOOK THE NIGHT.</span><span class="l2 grad">Get paid for it.</span></h1>
+      <p class="sub">Book DJs, hypemen and MCs with the money held safely in escrow. Talent gets paid within 24 hours. Hosts get who they booked. Everyone builds a reliability score.</p>
+      <div class="ctas"><a class="pill p" href="https://nightlife-poll.vercel.app" target="_blank" rel="noopener">Join early access</a><a class="pill g" href="#how">How it works</a></div>
+    </div>
+    <div class="deck" aria-hidden="true"><div class="rec"><div class="disc"></div><div class="sheen"></div></div><div class="arm"><b></b></div></div>
+  </div>
+  <div class="eq" id="eq" aria-hidden="true"></div>
+</header>
+
+<div class="ticker" aria-label="Problems Nytebook solves">
+  <div class="row"><span>No-show at 11pm</span><span>“I’ll pay you after the event”</span><span>Cancelled on the day</span><span>Deposit gone</span><span>Fake bookings</span><span>Played 2 hours, paid for 1</span><span>No-show at 11pm</span><span>“I’ll pay you after the event”</span><span>Cancelled on the day</span><span>Deposit gone</span><span>Fake bookings</span><span>Played 2 hours, paid for 1</span></div>
+  <div class="row r"><span>Ghosted after the gig</span><span>Wrong DJ showed up</span><span>Promoter disappeared</span><span>“Transfer is pending”</span><span>Booked via DM, no proof</span><span>Ghosted after the gig</span><span>Wrong DJ showed up</span><span>Promoter disappeared</span><span>“Transfer is pending”</span><span>Booked via DM, no proof</span></div>
+</div>
+
+<section class="how" id="how"><div class="wrap">
+  <div class="eyebrow mono rv">How it works</div>
+  <h2 class="rv" style="--d:1">Four steps. <span class="grad">Zero chasing.</span></h2>
+  <div class="steps" id="steps">
+    <div class="rail"><i></i></div>
+    <div class="step rv" style="--d:1"><div class="node">1</div><div><span class="mono">Book</span><h3>Pick your talent</h3><p>Browse DJs, hypemen and MCs by city, genre, fee and reliability score.</p></div></div>
+    <div class="step rv" style="--d:2"><div class="node">2</div><div><span class="mono">Escrow</span><h3>Pay into escrow</h3><p>Money is held by a licensed partner, not by the talent and not by us.</p></div></div>
+    <div class="step rv" style="--d:3"><div class="node">3</div><div><span class="mono">Perform</span><h3>The night happens</h3><p>Check-in at the venue confirms the set started on time.</p></div></div>
+    <div class="step rv" style="--d:4"><div class="node">4</div><div><span class="mono">Payout</span><h3>Paid within 24h</h3><p>Funds release automatically. Disputes go to a human, fast.</p></div></div>
+  </div>
+</div></section>
+
+<section class="score" id="score"><div class="wrap">
+  <div class="eyebrow mono rv">Reliability score</div>
+  <h2 class="rv" style="--d:1">Trust you can <span class="grad">see before you book.</span></h2>
+  <p class="lead rv" style="--d:2">Every completed gig updates both sides. Show up, play the full set, pay on time — your score climbs and better bookings follow.</p>
+  <div class="cards">
+    <div class="card prof rv" id="prof" style="--d:1">
+      <div class="ph" role="img" aria-label="DJ Kxng at the decks"></div>
+      <div>
+        <div class="who"><div><div class="mono" style="color:var(--cy)">DJ · Afrobeats / Amapiano</div><h3>DJ Kxng</h3><p>Lagos · 142 gigs on Nytebook</p></div>
+          <div class="gauge"><svg viewBox="0 0 118 118"><defs><linearGradient id="gg" x1="0" x2="1"><stop offset="0" stop-color="#ff2bd6"/><stop offset="1" stop-color="#22e1ff"/></linearGradient></defs><circle class="t" cx="59" cy="59" r="52"/><circle class="v" cx="59" cy="59" r="52" style="--off:19.6"/></svg><b data-to="94">0</b><small>SCORE</small></div></div>
+        <div class="bars">
+          <div class="bar" style="--d:0;--w:.98"><div class="lab"><span>Shows up on time</span><span>98%</span></div><div class="tr"><i></i></div></div>
+          <div class="bar" style="--d:1;--w:.95"><div class="lab"><span>Plays the full set</span><span>95%</span></div><div class="tr"><i></i></div></div>
+          <div class="bar" style="--d:2;--w:.89"><div class="lab"><span>Rebooked by hosts</span><span>89%</span></div><div class="tr"><i></i></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="card host rv" style="--d:2">
+      <div class="img" role="img" aria-label="Skyline Lounge rooftop"></div>
+      <div class="mono" style="color:var(--cy)">Host · Venue</div>
+      <h3>Skyline Lounge</h3><p>Victoria Island · 61 bookings</p>
+      <span class="chip"><i></i>Pays on time 100%</span><span class="chip"><i></i>No cancellations</span><span class="chip"><i></i>Rebooks talent 74%</span>
+    </div>
+  </div>
+</div></section>
+
+<section id="sides"><div class="wrap">
+  <div class="eyebrow mono rv">Built for both sides</div>
+  <h2 class="rv" style="--d:1">Your night. <span class="grad">Your money. Protected.</span></h2>
+  <div class="sides">
+    <div class="side rv tilt" style="--d:1"><div class="mono">For DJs, hypemen &amp; MCs</div><h3>Get paid. Every time.</h3><ul><li>Fee is in escrow before you leave home</li><li>Payout within 24 hours of the set</li><li>A score that proves you’re the real deal</li><li>Bookings from verified hosts only</li></ul></div>
+    <div class="side rv tilt" style="--d:2"><div class="mono">For hosts, venues &amp; planners</div><h3>Book with certainty.</h3><ul><li>See every artist’s track record first</li><li>Your money is safe if they don’t show</li><li>Contracts, times and riders in one place</li><li>Rebook favourites in two taps</li></ul></div>
+  </div>
+</div></section>
+
+<section class="cta"><div class="wrap">
+  <h2 class="rv">Be first on <span class="grad">Nytebook.</span></h2>
+  <p class="lead rv" style="--d:1">We’re building with DJs, hypemen and hosts across Nigeria. Tell us your biggest booking headache and get early access.</p>
+  <div class="ctas rv" style="--d:2"><a class="pill p" href="https://nightlife-poll.vercel.app" target="_blank" rel="noopener">Take the 2-minute poll</a><a class="pill g" href="https://wa.me/2349066339975" target="_blank" rel="noopener">Chat on WhatsApp</a></div>
+</div></section>
+
+<footer><div class="wrap"><span>© <span id="yr"></span> Nytebook. Concept build by Xi-kki.</span><span class="mono">Book the night.</span></div></footer>
+<a class="wa" href="https://wa.me/2349066339975" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2.1 1-2.4c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2.1 1.3 2.4 1.5.3.1.5.1.7-.1l.9-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg></a>
+
+<script>
+(() => {
+  const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const root = document.documentElement;
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // split headline into letters
+  const l1 = document.querySelector('#h1 .l1');
+  let i = 0;
+  l1.innerHTML = l1.textContent.split(' ').map(w => `<span class="wd">${[...w].map(c => `<span class="ch" style="--i:${i++}">${c}</span>`).join('')}</span>`).join(' ');
+
+  // equaliser bars
+  const eq = document.getElementById('eq');
+  const n = innerWidth < 860 ? 18 : 32;
+  let html = '';
+  for (let k = 0; k < n; k++) html += `<span style="--t:${(.5 + Math.random() * .7).toFixed(2)}s;--d:-${(Math.random()).toFixed(2)}s;--h:${(.35 + Math.random() * .65).toFixed(2)}"></span>`;
+  eq.innerHTML = html;
+
+  // intro
+  requestAnimationFrame(() => requestAnimationFrame(() => document.body.classList.add('on')));
+  setTimeout(() => document.body.classList.add('done'), 2600);
+
+  // adaptive quality: slow first frames -> lowfx
+  if (!RM) {
+    let f = 0, t0 = 0, last = 0, slow = 0;
+    const probe = t => { if (!t0) t0 = last = t; else { if (t - last > 24) slow++; last = t; } if (++f < 40) requestAnimationFrame(probe); else if (slow > 12) root.classList.add('lowfx'); };
+    requestAnimationFrame(probe);
+  }
+
+  // reveals
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); if (e.target.id === 'prof') count(e.target.querySelector('[data-to]')); } }), { threshold: .18, rootMargin: '0px 0px -6% 0px' });
+  document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+  function count(el) {
+    const to = +el.dataset.to, t0 = performance.now(), D = RM ? 0 : 2000;
+    const tick = t => { const p = D ? Math.min(1, (t - t0) / D) : 1; el.textContent = Math.round(to * (1 - Math.pow(1 - p, 3))); if (p < 1) requestAnimationFrame(tick); };
+    requestAnimationFrame(tick);
+  }
+
+  // single rAF-throttled scroll handler
+  const nav = document.getElementById('nav'), hbg = document.getElementById('hbg');
+  const steps = document.getElementById('steps'), rail = steps.querySelector('.rail'), nodes = [...steps.querySelectorAll('.step')];
+  let ticking = false, lastP = -1, lastY = -1, solid = null;
+  function onScroll() {
+    ticking = false;
+    const y = scrollY, vh = innerHeight;
+    const s = y > 40; if (s !== solid) { solid = s; nav.classList.toggle('solid', s); }
+    if (!RM && y < vh * 1.2) { const hy = Math.round(y * .25); if (hy !== lastY) { lastY = hy; hbg.style.setProperty('--hy', hy + 'px'); } }
+    const r = steps.getBoundingClientRect();
+    let p = (vh * .75 - r.top) / (r.height + vh * .1);
+    p = Math.max(0, Math.min(1, p));
+    p = Math.round(p * 200) / 200;
+    if (p !== lastP) { lastP = p; rail.style.setProperty('--p', p); nodes.forEach((nd, k) => nd.classList.toggle('lit', p >= k / (nodes.length - 1) - .02)); }
+  }
+  addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
+  addEventListener('resize', onScroll);
+  onScroll();
+
+  // subtle tilt on desktop pointer only
+  if (!RM && matchMedia('(hover:hover) and (pointer:fine)').matches) {
+    document.querySelectorAll('.tilt').forEach(el => {
+      el.addEventListener('pointermove', e => { const b = el.getBoundingClientRect(); el.style.setProperty('--ry', (((e.clientX - b.left) / b.width - .5) * 6).toFixed(2) + 'deg'); el.style.setProperty('--rx', (-((e.clientY - b.top) / b.height - .5) * 6).toFixed(2) + 'deg'); });
+      el.addEventListener('pointerleave', () => { el.style.setProperty('--rx', '0deg'); el.style.setProperty('--ry', '0deg'); });
+    });
+  }
+})();
+</script>
+</body>
+</html>
