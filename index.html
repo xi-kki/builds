@@ -10,7 +10,7 @@
 <meta property="og:image" content="https://xi-kki.github.io/builds/shots/virtualfit.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;800&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#f6f4f0; --ink:#121212; --muted:#6b6862; --line:rgba(18,18,18,.10); --card:#ffffff; --chip:rgba(18,18,18,.06);
@@ -19,7 +19,7 @@
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e0e0f;--ink:#f2f0ec;--muted:#9a968f;--line:rgba(255,255,255,.10);--card:#18181a;--chip:rgba(255,255,255,.08);--acc:#3ddc84}}
 :root[data-theme="dark"]{--bg:#0e0e0f;--ink:#f2f0ec;--muted:#9a968f;--line:rgba(255,255,255,.10);--card:#18181a;--chip:rgba(255,255,255,.08);--acc:#3ddc84}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{background:var(--bg);color:var(--ink);font-family:Geist,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
 .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
 header{padding:28px 0;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}
@@ -27,12 +27,21 @@ header{padding:28px 0;display:flex;align-items:center;justify-content:space-betw
 .logo span{color:var(--muted);font-weight:500}
 header nav{display:flex;gap:22px;font-size:14px;color:var(--muted)}
 header nav a:hover{color:var(--ink)}
-.hero{padding:88px 0 56px}
-.hero h1{font-size:clamp(34px,6.6vw,92px);line-height:1;letter-spacing:-.05em;font-weight:800}
+.hero{padding:72px 0 64px;display:grid;grid-template-columns:1fr 1fr;grid-template-areas:"h h" "c s";gap:40px 48px;align-items:center}
+.hero h1{grid-area:h}.hero .copy{grid-area:c;align-self:start}.hero .stack{grid-area:s}
+.stack{position:relative;aspect-ratio:4/3.4}
+.stack img{position:absolute;width:78%;height:auto;aspect-ratio:16/10;object-fit:cover;border-radius:14px;border:1px solid var(--line);box-shadow:0 24px 50px -24px color-mix(in srgb,var(--ink) 35%,transparent);transition:transform .6s var(--ease)}
+.stack img:nth-child(1){left:0;top:0;transform:rotate(-4deg)}
+.stack img:nth-child(2){right:0;top:22%;transform:rotate(3deg);z-index:1}
+.stack img:nth-child(3){left:10%;bottom:0;transform:rotate(-1deg);z-index:2}
+.stack:hover img:nth-child(1){transform:rotate(-6deg) translate(-8px,-6px)}
+.stack:hover img:nth-child(2){transform:rotate(5deg) translate(8px,-4px)}
+@media (max-width:860px){.hero{grid-template-columns:1fr;grid-template-areas:"h" "c" "s";gap:28px;padding:48px 0 40px}.stack{max-width:520px}}
+.hero h1{font-size:clamp(30px,4.2vw,58px);line-height:1.06;letter-spacing:-.05em;font-weight:800}
 .eyebrow{font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:22px;display:flex;align-items:center;gap:10px}
 .eyebrow i{width:8px;height:8px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 0 var(--acc);animation:ping 2s infinite}
 @keyframes ping{70%{box-shadow:0 0 0 10px transparent}100%{box-shadow:0 0 0 0 transparent}}
-.beat{display:block;position:relative;width:max-content;max-width:100%}
+.beat{display:block;position:relative;width:fit-content;max-width:100%}
 .beat .txt{display:inline-block;clip-path:inset(0 100% 0 0)}
 .beat .bar{position:absolute;inset:.06em -.04em .02em;background:var(--ink);transform:scaleX(0);transform-origin:left}
 .beat.paid .bar{background:var(--acc)}
@@ -43,13 +52,16 @@ header nav a:hover{color:var(--ink)}
 .hero p b{color:var(--ink);font-weight:600}
 .cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
 .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 22px;border-radius:999px;font-weight:600;font-size:15px;transition:transform .4s var(--ease),box-shadow .4s var(--ease)}
-.btn.pri{background:var(--acc);color:#04120a;box-shadow:0 12px 30px -12px var(--acc)}
+.btn.pri{background:var(--acc);color:#04120a}
+.btn:active{transform:scale(.98)}
 .btn.sec{border:1px solid var(--line)}
 .btn:hover{transform:translateY(-2px)}
-.journey{margin-top:56px;position:relative;display:grid;grid-template-columns:repeat(5,1fr);gap:12px;padding-top:34px}
+.path{padding:8px 0 72px;border-bottom:1px solid var(--line);margin-bottom:40px}
+.path h2{font-size:clamp(24px,3vw,34px);font-weight:600;letter-spacing:-.03em}
+.journey{margin-top:40px;position:relative;display:grid;grid-template-columns:repeat(5,1fr);gap:12px;padding-top:34px}
 .journey .rail{position:absolute;top:13px;left:10%;right:10%;height:2px;background:var(--line);border-radius:2px}
 .journey .fill{position:absolute;inset:0;background:var(--acc);transform:scaleX(0);transform-origin:left;border-radius:2px}
-.journey .pulse{position:absolute;top:-6px;left:0;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 6px color-mix(in srgb,var(--acc) 25%,transparent),0 0 24px var(--acc)}
+.journey .pulse{position:absolute;top:-6px;left:0;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 5px color-mix(in srgb,var(--acc) 22%,transparent)}
 .step{text-align:center;position:relative}
 .step .dot{position:absolute;top:-28px;left:50%;width:16px;height:16px;margin-left:-8px;border-radius:50%;background:var(--bg);border:2px solid var(--line);transition:background .3s,border-color .3s,transform .3s var(--ease)}
 .step.on .dot{background:var(--acc);border-color:var(--acc);transform:scale(1.25)}
@@ -99,13 +111,23 @@ footer{border-top:1px solid var(--line);padding:28px 0 40px;color:var(--muted);f
   </header>
 
   <section class="hero">
-    <h1 aria-label="Websites that move you from where you are, to where you want to be.">
-      <span class="beat" aria-hidden="true"><span class="txt">Websites that move you</span><span class="bar"></span></span>
-      <span class="beat muted" aria-hidden="true"><span class="txt">from where you are,</span><span class="bar"></span></span>
-      <span class="beat paid" aria-hidden="true"><span class="txt">to <span class="word">where you want to be.</span></span><span class="bar"></span></span>
-    </h1>
-    <p class="reveal">Turn searches into <b>WhatsApp sales</b>.</p>
-    <div class="cta-row reveal"><a class="btn pri" href="https://wa.me/2349066339975?text=Hi%20Xi-kki%2C%20I%27d%20like%20a%20website%20that%20brings%20me%20customers" target="_blank" rel="noopener">Get my website</a><a class="btn sec" href="#work">See work &darr;</a></div>
+      <h1 aria-label="Websites that move you from where you are to where you want to be.">
+        <span class="beat" aria-hidden="true"><span class="txt">Websites that move you from where you are</span><span class="bar"></span></span>
+        <span class="beat paid" aria-hidden="true"><span class="txt"><span class="word">to where you want to be.</span></span><span class="bar"></span></span>
+      </h1>
+    <div class="copy">
+      <p class="reveal">Turn searches into <b>WhatsApp sales</b>.</p>
+      <div class="cta-row reveal"><a class="btn pri" href="https://wa.me/2349066339975?text=Hi%20Xi-kki%2C%20I%27d%20like%20a%20website%20that%20brings%20me%20customers" target="_blank" rel="noopener">Get my website</a><a class="btn sec" href="#work">See work</a></div>
+    </div>
+    <div class="stack reveal" aria-hidden="true">
+      <img src="shots/tana-camps.jpg" alt="" width="1200" height="750">
+      <img src="shots/virtualfit.jpg" alt="" width="1200" height="750">
+      <img src="shots/nytebook.jpg" alt="" width="1200" height="750">
+    </div>
+  </section>
+
+  <section class="path">
+    <h2>From search to sale.</h2>
     <div class="journey" id="journey" aria-label="How a website turns a search into a sale">
       <div class="rail"><div class="fill"></div><div class="pulse"></div></div>
       <div class="step"><i class="dot"></i><b>Search</b></div>
@@ -118,9 +140,9 @@ footer{border-top:1px solid var(--line);padding:28px 0 40px;color:var(--muted);f
 
   <main id="work" class="grid"></main>
 
-  <footer><span>© <span id="yr"></span> Xi-kki Builds</span><span>Want one? <a href="https://wa.me/2349066339975?text=Hi%20Xi-kki%2C%20I%27d%20like%20a%20website" target="_blank" rel="noopener" style="text-decoration:underline">Chat on WhatsApp</a></span></footer>
+  <footer><span>© <span id="yr"></span> Xi-kki Builds</span><span><a href="https://wa.me/2349066339975?text=Hi%20Xi-kki%2C%20I%27d%20like%20a%20website" target="_blank" rel="noopener" style="text-decoration:underline">Get my website</a></span></footer>
 </div>
-<a class="wa" href="https://wa.me/2349066339975?text=Hi%20Xi-kki%2C%20I%27d%20like%20a%20website" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+<a class="wa" href="https://wa.me/2349066339975?text=Hi%20Xi-kki%2C%20I%27d%20like%20a%20website" target="_blank" rel="noopener" aria-label="Get my website on WhatsApp">
   <svg viewBox="0 0 32 32" width="28" height="28" fill="#fff" aria-hidden="true"><path d="M16.04 3C9.4 3 4 8.38 4 15c0 2.12.56 4.18 1.62 6L4 29l8.2-1.6A12.1 12.1 0 0 0 16.04 27C22.66 27 28 21.62 28 15S22.66 3 16.04 3zm0 21.8c-1.86 0-3.66-.5-5.24-1.44l-.38-.22-4.86.95.97-4.73-.25-.4A9.7 9.7 0 0 1 6.3 15c0-5.38 4.37-9.76 9.74-9.76 5.36 0 9.72 4.38 9.72 9.76s-4.36 9.8-9.72 9.8zm5.34-7.3c-.3-.15-1.73-.85-2-.95-.27-.1-.46-.15-.66.15-.2.3-.76.95-.93 1.14-.17.2-.34.22-.63.07-.3-.15-1.24-.46-2.37-1.46a8.9 8.9 0 0 1-1.64-2.04c-.17-.3-.02-.45.13-.6.13-.13.3-.34.44-.51.15-.17.2-.3.3-.49.1-.2.05-.37-.03-.52-.07-.15-.66-1.58-.9-2.17-.24-.57-.48-.49-.66-.5h-.56c-.2 0-.51.07-.78.37-.27.3-1.02 1-1.02 2.42s1.05 2.81 1.2 3c.15.2 2.06 3.14 5 4.4.7.3 1.24.48 1.67.62.7.22 1.34.19 1.84.12.56-.08 1.73-.7 1.97-1.38.25-.68.25-1.27.17-1.39-.07-.12-.27-.2-.56-.34z"/></svg>
 </a>
 <script>
