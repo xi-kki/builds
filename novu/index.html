@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Novu® London — High-Fashion Novus</title>
+<meta name="description" content="Fully 3D fashion characters, ready to redesign digital couture.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 28 28%27%3E%3Cpath d=%27M4 4l6 6h8l6-6-1 12c0 5-4 9-9 9s-9-4-9-9z%27/%3E%3Crect x=%278.6%27 y=%2712.6%27 width=%2710.8%27 height=%273.4%27 rx=%271.4%27 fill=%27%23ff5a1f%27/%3E%3C/svg%3E">
+<link rel="preload" href="fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="frames/f001.webp" as="image">
+<style>
+@font-face{font-family:Outfit;src:url(fonts/outfit.woff2) format("woff2");font-weight:100 900;font-display:swap}
+@font-face{font-family:Archivo;src:url(fonts/archivo.woff2) format("woff2");font-weight:100 900;font-stretch:62% 125%;font-display:swap}
+:root{--bg:#e9e6e1;--ink:#0b0b0b;--mute:#77736d;--pill:rgba(255,255,255,.42);--line:rgba(11,11,11,.14);--acc:#ff5a1f;--vw:100vw;
+  --u:calc(var(--vw)/1440);--n:min(calc(var(--vw)/1440),calc(100svh/760));--e:cubic-bezier(.2,.8,.2,1)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--ink)}
+body{font-family:Archivo,system-ui,sans-serif;font-stretch:112%;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}button{background:none;border:0;font:inherit;color:inherit;cursor:pointer}
+img{display:block}
+html.lenis,html.lenis body{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!important}.lenis.lenis-stopped{overflow:hidden}
+.lbl{font-weight:700;font-stretch:108%;text-transform:uppercase;letter-spacing:-.01em}
+.grain{position:fixed;inset:-50%;z-index:60;pointer-events:none;opacity:.07;mix-blend-mode:multiply;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:grain 1s steps(6) infinite}
+@keyframes grain{0%,100%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-4%)}60%{transform:translate(-4%,-1%)}80%{transform:translate(3%,3%)}}
+.vig{position:fixed;inset:0;z-index:59;pointer-events:none;box-shadow:inset 0 0 calc(220*var(--n)) rgba(60,52,44,.22)}
+
+/* nav */
+.nav{position:fixed;top:0;left:0;right:0;height:calc(66*var(--n));z-index:40;pointer-events:none}
+.nav>*{pointer-events:auto;position:absolute}
+.pill{white-space:nowrap;display:flex;align-items:center;justify-content:space-between;gap:calc(16*var(--n));height:calc(50*var(--n));padding:0 calc(9*var(--n)) 0 calc(24*var(--n));border-radius:999px;background:var(--pill);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);font-size:calc(13*var(--n));transition:background .45s var(--e),opacity .4s,transform .4s}
+.pill .c{width:calc(32*var(--n));height:calc(32*var(--n));border-radius:50%;background:var(--ink);display:grid;place-items:center;flex:none;transition:transform .45s var(--e),background .45s var(--e)}
+.pill .c svg{width:40%;height:40%}
+.pill:hover{background:rgba(255,255,255,.75)}.pill:hover .c{background:var(--acc);transform:rotate(90deg) scale(1.08)}
+#trailer{left:calc(53*var(--n));top:calc(8*var(--n));width:calc(178*var(--n))}
+.center{left:calc(463*var(--n));top:calc(22*var(--n));font-size:calc(14.5*var(--n));transition:opacity .4s,transform .4s}
+#market{right:calc(127*var(--n));top:calc(8*var(--n));width:calc(227*var(--n))}
+#menuBtn{right:calc(55*var(--n));top:calc(8*var(--n));width:calc(50*var(--n));height:calc(50*var(--n));border-radius:50%;background:#fff;box-shadow:0 6px 24px rgba(0,0,0,.06);transition:transform .3s var(--e);z-index:2}
+#menuBtn:hover{transform:scale(1.08)}
+#menuBtn i{position:absolute;left:50%;top:50%;width:calc(16*var(--n));height:2px;background:var(--ink);transition:transform .35s var(--e),opacity .25s}
+#menuBtn i:nth-child(1){transform:translate(-50%,calc(-50% - 5*var(--n)))}#menuBtn i:nth-child(2){transform:translate(-50%,-50%)}#menuBtn i:nth-child(3){transform:translate(-50%,calc(-50% + 5*var(--n)))}
+.menu-open #menuBtn i:nth-child(1){transform:translate(-50%,-50%) rotate(45deg)}.menu-open #menuBtn i:nth-child(2){opacity:0}.menu-open #menuBtn i:nth-child(3){transform:translate(-50%,-50%) rotate(-45deg)}
+.mini{left:calc(53*var(--n));top:calc(18*var(--n));font-family:Outfit;font-weight:600;font-size:calc(30*var(--n));letter-spacing:-.02em;opacity:0;transform:translateY(-8px);pointer-events:none;transition:opacity .4s,transform .4s}
+.mini sup{font-size:.45em}
+.scrolled .mini{opacity:1;transform:none;pointer-events:auto}
+.scrolled #trailer,.scrolled #market,.scrolled .center{opacity:0;transform:translateY(-10px);pointer-events:none}
+.menu{position:fixed;inset:0;z-index:35;background:rgba(233,230,225,.86);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);display:flex;flex-direction:column;justify-content:center;padding:0 calc(53*var(--n));visibility:hidden;opacity:0;transition:opacity .4s,visibility 0s .4s}
+.menu-open .menu{visibility:visible;opacity:1;transition:opacity .4s}
+.menu a{font-weight:900;font-stretch:125%;text-transform:uppercase;font-size:max(40px,calc(88*var(--n)));line-height:1;letter-spacing:-.03em;opacity:0;transform:translateY(30px);transition:opacity .6s var(--e),transform .6s var(--e),color .3s;width:max-content}
+.menu a span{font-size:.18em;font-weight:500;letter-spacing:.2em;margin-right:.6em;vertical-align:middle}
+.menu a:hover{color:var(--acc)}
+.menu-open .menu a{opacity:1;transform:none}.menu-open .menu a:nth-child(2){transition-delay:.06s}.menu-open .menu a:nth-child(3){transition-delay:.12s}
+
+/* bottom bar */
+.bar{position:fixed;left:0;right:0;bottom:0;height:calc(100*var(--n));z-index:40;pointer-events:none;transition:opacity .5s,transform .5s}
+.bar>*{position:absolute;pointer-events:auto}
+.at-end .bar{opacity:0;transform:translateY(20px)}.at-end .bar>*{pointer-events:none}
+#roadmap{left:calc(53*var(--n));bottom:calc(22*var(--n));width:calc(188*var(--n))}
+#rand{left:calc(261*var(--n));bottom:calc(22*var(--n));width:calc(52*var(--n));height:calc(52*var(--n));border-radius:50%;background:var(--pill);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);display:grid;place-items:center;transition:transform .45s var(--e)}
+#rand svg{width:calc(26*var(--n));height:calc(26*var(--n))}#rand:hover{transform:rotate(-12deg) scale(1.06)}
+.switch{left:50%;transform:translateX(-50%);bottom:calc(32*var(--n));display:flex;align-items:center;gap:calc(12*var(--n))}
+.switch .h{font-size:calc(10*var(--n));color:#fff;opacity:.85;font-weight:700;letter-spacing:.08em;text-shadow:0 1px 6px rgba(0,0,0,.25)}
+#novubar{height:calc(32*var(--n));padding:0 calc(36*var(--n));background:var(--ink);color:#fff;border-radius:calc(6*var(--n));font-size:calc(13*var(--n));box-shadow:0 calc(3*var(--n)) 0 #000,0 calc(6*var(--n)) 14px rgba(0,0,0,.18);transition:transform .14s,box-shadow .14s}
+#novubar.hit{transform:translateY(calc(3*var(--n)));box-shadow:0 0 0 #000,0 calc(2*var(--n)) 6px rgba(0,0,0,.18)}
+#index{left:calc(1111*var(--n));bottom:calc(40*var(--n));font-size:calc(13.5*var(--n));display:flex;gap:6px;align-items:center}
+#index::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:1.5px;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .45s var(--e)}
+#index:hover::after{transform:scaleX(1)}#index svg{width:.8em;height:.8em;transition:transform .45s var(--e)}#index:hover svg{transform:translate(2px,-2px)}
+.dots{display:flex;gap:calc(4*var(--n))}.dots i{width:calc(3.5*var(--n));height:calc(3.5*var(--n));min-width:3px;min-height:3px;border-radius:50%;background:var(--ink);animation:blink 1.8s infinite}
+.dots i:nth-child(2){animation-delay:.12s}.dots i:nth-child(3){animation-delay:.24s}.dots i:nth-child(4){animation-delay:.36s}.dots i:nth-child(5){animation-delay:.48s}
+@keyframes blink{50%{opacity:.2}}
+.bar .dots{right:calc(58*var(--n));bottom:calc(43*var(--n))}
+
+/* stage */
+.stage{position:relative}
+.scene{position:sticky;top:0;height:100svh;margin-bottom:-100svh;overflow:hidden;z-index:0;pointer-events:none;opacity:0;transition:opacity .9s}
+.scene-on .scene{opacity:1}
+.scene canvas{width:100%;height:100%;display:block}
+.hero{position:relative;z-index:1;height:100svh;min-height:520px;overflow:hidden}
+.frame{position:absolute;left:0;right:0;top:0;height:max(calc(900*var(--u)),100%)}
+.hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none}
+.wm{position:absolute;inset:0;font-weight:650;line-height:1;font-size:calc(177*var(--u));white-space:nowrap;will-change:transform}
+.wm .p{position:absolute;display:block}
+.wm .ch{display:inline-block}
+.wm .novu{left:calc(53*var(--u));top:calc(72.3*var(--u));font-stretch:107%}
+.wm .reg{left:calc(533*var(--u));top:calc(103*var(--u));width:calc(70*var(--u));height:calc(70*var(--u))}
+.wm .london{left:calc(650*var(--u));top:calc(72.3*var(--u));font-stretch:100%}
+.copy{position:absolute;top:calc(298*var(--u));font-weight:600;font-stretch:104%;font-size:calc(16.5*var(--u));line-height:1.22;text-transform:uppercase;letter-spacing:-.005em}
+.copy b{font-weight:850}
+.mask{display:block;overflow:hidden}.mask>span{display:block}
+.c1{left:calc(53*var(--u))}.c2{left:calc(339*var(--u))}
+.tag{position:absolute;left:calc(1022*var(--u));top:calc(596*var(--u));font-size:calc(13.5*var(--u));display:flex;align-items:center;gap:calc(10*var(--u))}
+.tag svg{width:calc(46*var(--u));height:calc(8*var(--u));overflow:visible}
+.tag path{stroke-dasharray:46;stroke-dashoffset:46;animation:draw 2.4s cubic-bezier(.6,0,.2,1) 1.6s infinite}
+@keyframes draw{0%{stroke-dashoffset:46}45%,60%{stroke-dashoffset:0}100%{stroke-dashoffset:-46}}
+
+.story{position:relative;z-index:1;height:300svh}
+.stick{position:sticky;top:0;height:100svh;overflow:hidden}
+.story .frame{height:100%}
+.story-img,.story-bg{display:none}
+.panel{position:absolute;left:calc(140*var(--u));top:calc(262*var(--u));width:calc(600*var(--u));opacity:0}
+.scene-on .panel.p1{left:calc(860*var(--u))}
+.panel .l{font-size:calc(11*var(--u));letter-spacing:.35em;color:var(--mute);font-weight:500;font-stretch:125%;display:block}
+.panel h2{margin-top:calc(30*var(--u));font-weight:900;font-stretch:125%;font-size:calc(40*var(--u));line-height:.92;letter-spacing:-.025em;text-transform:uppercase}
+.panel h2 .mask{padding-bottom:.04em}
+.panel p{margin-top:calc(22*var(--u));font-size:calc(15.5*var(--u));line-height:1.36;color:#55514b;font-stretch:108%;font-weight:450;max-width:calc(330*var(--u))}
+.panel em{font-style:normal;color:var(--acc)}
+.dash{position:absolute;left:calc(140*var(--u));top:calc(560*var(--u));display:flex;gap:calc(8*var(--u));transition:left .6s var(--e)}
+.dash i{display:block;width:calc(46*var(--u));height:2px;background:var(--line);position:relative;overflow:hidden}
+.dash i b{position:absolute;inset:0;background:var(--ink);transform:scaleX(0);transform-origin:left}
+.dash.right{left:calc(860*var(--u))}
+
+/* partners */
+.partners{padding-top:calc(56*var(--n));background:linear-gradient(#e9e6e1,#f1efec 60%,#f4f3f1);position:relative;z-index:2}
+.partners .l{font-size:calc(11*var(--n));letter-spacing:.35em;color:var(--mute);font-weight:500;font-stretch:125%;margin-left:calc(50*var(--n))}
+.partners h2{margin:calc(14*var(--n)) 0 0 calc(50*var(--n));font-weight:900;font-stretch:125%;font-size:calc(42*var(--n));line-height:.9;letter-spacing:-.025em;text-transform:uppercase}
+.track{display:flex;gap:calc(20*var(--n));padding:calc(28*var(--n)) calc(50*var(--n)) 0;overflow-x:auto;scrollbar-width:none;cursor:grab;user-select:none}
+.track::-webkit-scrollbar{display:none}.track.drag{cursor:grabbing}
+.card{flex:none;width:calc(253*var(--n));aspect-ratio:1/1.179;overflow:hidden;background:#cfcbc5;position:relative}
+.card .art{position:absolute;inset:0;background:url(img/partners.webp) no-repeat;background-size:304.9% 203.25%;filter:grayscale(.85) contrast(1.02);transition:filter 1s,transform 1s var(--e)}
+.card:hover .art{filter:none;transform:scale(1.06)}
+.card .cap{position:absolute;left:0;right:0;bottom:0;padding:calc(30*var(--n)) calc(14*var(--n)) calc(12*var(--n));display:flex;justify-content:space-between;color:#fff;font-size:calc(11*var(--n));font-weight:700;text-transform:uppercase;background:linear-gradient(transparent,rgba(0,0,0,.55));transform:translateY(100%);transition:transform .5s var(--e)}
+.card .cap span:last-child{font-weight:500;letter-spacing:.2em;opacity:.8}
+.card:hover .cap{transform:none}
+.prog{margin:calc(52*var(--n)) calc(50*var(--n)) 0;height:2px;background:var(--line)}.prog i{display:block;height:100%;background:var(--ink);width:20%}
+.foot{display:grid;grid-template-columns:1fr auto auto auto;column-gap:calc(52*var(--n));padding:calc(76*var(--n)) calc(50*var(--n)) calc(30*var(--n))}
+.big{font-weight:900;font-stretch:125%;font-size:calc(21*var(--n));line-height:1;text-transform:uppercase}
+.foot small{display:block;font-size:calc(12.5*var(--n));color:var(--mute);font-weight:450;font-stretch:108%;margin-top:calc(18*var(--n))}
+.foot .cw{margin-right:calc(70*var(--n))}
+.links{display:flex;flex-direction:column;gap:calc(7*var(--n))}
+.links a{font-size:calc(13.5*var(--n));color:#4f4b45;font-stretch:108%;transition:color .3s;min-height:24px}
+.links a span{display:inline-block;transition:transform .35s var(--e),color .35s}
+.links a:hover{color:var(--ink)}.links a:hover span{transform:translate(2px,-2px);color:var(--acc)}
+.legal{border-top:1px solid var(--line);margin:0 calc(50*var(--n));padding:calc(36*var(--n)) 0 calc(56*var(--n));display:flex;gap:calc(36*var(--n));align-items:center;font-size:calc(10*var(--n));letter-spacing:.38em;font-weight:600;font-stretch:125%;text-transform:uppercase;white-space:nowrap}
+.legal .m{color:var(--mute)}.legal .sp{flex:1}.legal a:hover{color:var(--acc)}
+
+/* pre state */
+.pre .wm .ch,.pre .copy .mask>span,.pre .tag,.pre #trailer,.pre .center,.pre #market,.pre #menuBtn,.pre .bar>*{opacity:0}
+
+/* reduced motion / phone stills */
+.stills .hero-img{display:block}
+.stills .story-img{display:block;position:absolute;right:0;top:0;width:60%;height:100%;object-fit:cover}
+@media (min-width:821px){.stills .story-bg{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:blur(30px);transform:scale(1.1);opacity:.6}}
+
+@media (max-width:820px){
+  :root{--u:calc(100vw/390);--n:calc(100vw/390)}
+  .center,#market,.mini,#roadmap,#rand,#index,.bar>.dots,.switch .h{display:none!important}
+  #trailer{left:16px;top:14px;height:42px;width:auto;font-size:11px;padding:0 6px 0 16px}#trailer .c{width:30px;height:30px}
+  #menuBtn{right:16px;top:14px;width:42px;height:42px}#menuBtn i{width:16px}
+  #menuBtn i:nth-child(1){transform:translate(-50%,calc(-50% - 5px))}#menuBtn i:nth-child(3){transform:translate(-50%,calc(-50% + 5px))}
+  .scrolled .nav{background:linear-gradient(var(--bg) 60%,transparent);height:80px}
+  .scrolled #trailer{opacity:1;transform:none;pointer-events:auto}
+  .switch{bottom:20px}#novubar{height:38px;font-size:12px;padding:0 28px;border-radius:7px}
+  .scene{display:none}
+  .hero{height:auto;min-height:0;padding-top:84px}
+  .hero .frame{position:relative;height:auto;padding:0 16px;display:flex;flex-direction:column}
+  .hero .wm{order:1}.hero .c1{order:2}.hero .c2{order:3}.hero-img{order:4}
+  .wm{position:relative;font-size:76px;line-height:.9;white-space:normal}
+  .wm .p{position:static;display:inline}.wm .london{display:block}
+  .wm .reg{display:inline-block;width:.36em;height:.36em;vertical-align:top;margin:.12em 0 0 .06em}
+  .wm .ch{letter-spacing:-.02em}
+  .copy{position:static;font-size:14px;margin-top:22px}
+  .hero-img{display:block;position:relative;height:470px;margin:20px -16px 0;width:calc(100% + 32px);object-position:57% 40%;-webkit-mask:linear-gradient(transparent,#000 26%);mask:linear-gradient(transparent,#000 26%)}
+  .tag{position:absolute;left:auto;right:16px;top:auto;bottom:16px;font-size:12px;gap:8px}.tag svg{width:46px;height:8px}
+  .story{height:auto}.stick{position:static;height:auto;overflow:visible;padding:40px 16px}
+  .story .frame{position:static;height:auto}
+  .panel,.scene-on .panel.p1{position:static;width:auto;opacity:1!important;margin-bottom:44px}
+  .panel .l{font-size:11px}.panel h2{font-size:33px;margin-top:16px}.panel p{font-size:14.5px;max-width:none;margin-top:14px}
+  .panel *{transform:none!important}
+  .dash{display:none}
+  .story-img{display:block!important;position:static!important;width:calc(100% + 32px)!important;margin:0 -16px;height:520px!important;object-fit:cover;object-position:72% 50%}
+  .partners{padding-top:56px}.partners .l{font-size:11px;margin-left:16px}.partners h2{font-size:38px;margin-left:16px}
+  .track{gap:12px;padding:24px 16px 0}.card{width:240px}.card .art{filter:grayscale(.3)}.card .cap{transform:none;font-size:11px}
+  .prog{margin:32px 16px 0}
+  .foot{grid-template-columns:1fr 1fr;row-gap:32px;padding:56px 16px 24px}
+  .foot>div:nth-child(1),.foot>div:nth-child(2){grid-column:1/-1}.big{font-size:24px}.foot .cw br{display:none}
+  .links a{font-size:14px;min-height:32px}
+  .legal{margin:0 16px;flex-wrap:wrap;white-space:normal;gap:14px 20px;font-size:10px;padding:28px 0 110px}.legal .sp{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .grain{display:none}
+}
+</style>
+</head>
+<body class="pre">
+<div class="grain" aria-hidden="true"></div><div class="vig" aria-hidden="true"></div>
+
+<header class="nav">
+  <a class="mini" href="#top">Novu<sup>®</sup></a>
+  <button class="pill lbl" id="trailer" type="button">Play Trailer<span class="c"><svg viewBox="0 0 10 10"><path d="M2.5 1.2 L9 5 L2.5 8.8 z" fill="#fff"/></svg></span></button>
+  <span class="center lbl">High-Fashion Novus</span>
+  <a class="pill lbl" id="market" href="#partners">View Marketplace<span class="c"><svg viewBox="0 0 10 10"><path d="M3.6 2.5v5M6.4 2.5v5" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg></span></a>
+  <button id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false"><i></i><i></i><i></i></button>
+</header>
+<nav class="menu" id="menu" aria-label="Site">
+  <a href="#top"><span>01</span>The Drop</a>
+  <a href="#walk"><span>02</span>The Walk</a>
+  <a href="#partners"><span>03</span>Partners</a>
+</nav>
+
+<div class="bar">
+  <a class="pill lbl" id="roadmap" href="#walk">Our Roadmap<span class="c"><svg viewBox="0 0 10 10" fill="none" stroke="#fff" stroke-width="1.4" stroke-linecap="round"><circle cx="2.4" cy="2.6" r="1.3"/><circle cx="7.6" cy="7.4" r="1.3"/><path d="M3.6 3.2C6 3.6 4 6.4 6.4 6.8"/></svg></span></a>
+  <button id="rand" type="button" aria-label="Random Novu"><svg viewBox="0 0 28 28"><path d="M4 4l6 6h8l6-6-1 12c0 5-4 9-9 9s-9-4-9-9z" fill="#0b0b0b"/><rect x="8.6" y="12.6" width="10.8" height="3.4" rx="1.4" fill="#ff5a1f"/><circle cx="14" cy="20.4" r="1.3" fill="#e9e6e1"/></svg></button>
+  <div class="switch"><span class="h">PRESS</span><button id="novubar" class="lbl" type="button">Novubar</button><span class="h">TO SWITCH</span></div>
+  <a id="index" class="lbl" href="#partners">Fashion Index<svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 8L8 2M3.5 2H8v4.5"/></svg></a>
+  <div class="dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+</div>
+
+<main id="top">
+<div class="stage" id="stage">
+  <div class="scene" aria-hidden="true"><canvas id="cv"></canvas></div>
+
+  <section class="hero" id="hero">
+    <div class="frame">
+      <img class="hero-img" id="heroImg" alt="A fennec fox character in orange shield sunglasses, a silver chain and a white varsity jacket">
+      <h1 class="wm" id="wm" aria-label="Novu London">
+        <span class="p novu" data-t="464" aria-hidden="true">Novu</span>
+        <span class="p reg ch" aria-hidden="true"><svg viewBox="0 0 70 70" width="100%" height="100%"><circle cx="35" cy="35" r="31" fill="none" stroke="currentColor" stroke-width="7"/><path fill="currentColor" d="M24 18h13.5c7.6 0 12.3 3.9 12.3 10.2 0 4.6-2.5 7.8-6.6 9.2L51 52h-8.6l-6.9-13.6H31.6V52H24zm7.6 6.3v8.1h5.6c3.1 0 4.9-1.5 4.9-4.1 0-2.5-1.8-4-4.9-4z"/></svg></span>
+        <span class="p london" data-t="737" aria-hidden="true">LONDON</span>
+      </h1>
+      <div class="copy c1"><span class="mask"><span><b>Built in 3D,</b> ready</span></span><span class="mask"><span>to redesign digital</span></span><span class="mask"><span>couture</span></span></div>
+      <div class="copy c2"><span class="mask"><span>Meet all</span></span><span class="mask"><span><b>7777 styled</b></span></span><span class="mask"><span>big-eared Novus</span></span></div>
+      <div class="tag lbl">NVU0023.<svg viewBox="0 0 46 8" fill="none" stroke="#0b0b0b" stroke-width="1.3"><path d="M1 4h44M41 1l4 3-4 3"/></svg></div>
+    </div>
+  </section>
+
+  <section class="story" id="walk">
+    <div class="stick">
+      <div class="frame">
+        <img class="story-bg" id="storyBg" alt="" aria-hidden="true">
+        <img class="story-img" id="storyImg" alt="The fennec fox walking in full outfit: varsity jacket, cargo shorts and white sneakers">
+        <article class="panel p1">
+          <span class="l">01 /</span>
+          <h2><span class="mask"><span>Streetwear, but</span></span><span class="mask"><span>made yours</span></span></h2>
+          <p>Swap your <em>NOVU's</em> style with limited digital drops, climb the Fashion Index and shape a look that lives in every world.</p>
+        </article>
+        <article class="panel p2">
+          <span class="l">02 /</span>
+          <h2><span class="mask"><span>Run the</span></span><span class="mask"><span>Novuwalk</span></span></h2>
+          <p>Hit the catwalk and flaunt your whole wardrobe. Become a <em>NOVUFLUENCER</em> and collect the real-world perks.</p>
+        </article>
+        <div class="dash" id="dash"><i><b></b></i><i><b></b></i></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<section class="partners" id="partners">
+  <div class="l">03 /</div>
+  <h2>Our<br>Partners</h2>
+  <div class="track" id="track"></div>
+  <div class="prog"><i id="progFill"></i></div>
+  <footer>
+    <div class="foot">
+      <div><div class="big">We sew, we style,<br>we walk. We win.</div><small>Novu Studio Manifest</small></div>
+      <div class="big cw">Connect<br> with<br> us</div>
+      <div class="links"><a href="#">Our channel <span>↗</span></a><a href="#partners">View the Market <span>↗</span></a><a href="#">Rarity Ranker <span>↗</span></a><a href="#partners">NOVU Fashion Index <span>↗</span></a></div>
+      <div class="links"><a href="#">The Atelier Journal <span>↗</span></a><a href="#">Drops <span>↗</span></a><a href="#">Kiln Studio <span>↗</span></a></div>
+    </div>
+    <div class="legal"><span class="m">© 2026 • Novu Labs</span><span>Styled by <b>@novustudioldn</b></span><span class="sp"></span><a href="#">Terms &amp; Conditions</a><a href="#">Privacy Policy</a><div class="dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div></div>
+  </footer>
+</section>
+</main>
+
+<script>
+(() => {
+const d = document, b = d.body, root = d.documentElement;
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const isPhone = () => innerWidth <= 820;
+const PHONE = isPhone();
+const VIDEO = !PHONE && !RM;
+const clamp = (x, a = 0, z = 1) => Math.min(z, Math.max(a, x));
+const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+const setVW = () => root.style.setProperty('--vw', root.clientWidth + 'px');
+setVW();
+
+/* chars */
+d.querySelectorAll('.wm .novu,.wm .london').forEach(el => { el.innerHTML = [...el.textContent].map(c => `<span class="ch">${c}</span>`).join(''); });
+
+/* stills (phones + reduced motion) */
+function loadStills() {
+  b.classList.add('stills');
+  const w = Math.min(2048, Math.max(1024, Math.round(innerWidth * devicePixelRatio * 1.05 / 64) * 64));
+  const s = w > 1024 ? 2048 : 1024;
+  d.getElementById('heroImg').src = `img/hero-${s}.webp`;
+  d.getElementById('storyImg').src = `img/story-${s}.webp`;
+  if (!PHONE) d.getElementById('storyBg').src = 'img/story-1024.webp';
+}
+if (!VIDEO) loadStills(); else b.classList.add('video-bg');
+
+/* wordmark fit */
+function fit() {
+  if (isPhone()) { d.querySelectorAll('.wm [data-t]').forEach(p => p.style.letterSpacing = ''); return; }
+  const u = root.clientWidth / 1440;
+  d.querySelectorAll('.wm [data-t]').forEach(p => {
+    p.style.letterSpacing = '0px';
+    const n = p.textContent.length, nat = p.getBoundingClientRect().width;
+    p.style.letterSpacing = ((+p.dataset.t * u - nat) / (n - 1)) + 'px';
+  });
+}
+
+/* menu */
+const menuBtn = d.getElementById('menuBtn');
+const setMenu = o => { b.classList.toggle('menu-open', o); menuBtn.setAttribute('aria-expanded', o); menuBtn.setAttribute('aria-label', o ? 'Close menu' : 'Open menu'); };
+menuBtn.onclick = () => setMenu(!b.classList.contains('menu-open'));
+d.querySelectorAll('.menu a').forEach(a => a.onclick = () => setMenu(false));
+addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+
+/* lenis */
+let lenis = null;
+function goTo(y) { lenis ? lenis.scrollTo(y, { duration: 1.6 }) : scrollTo({ top: y, behavior: RM ? 'auto' : 'smooth' }); }
+if (!RM) {
+  const s = d.createElement('script'); s.src = 'https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js';
+  s.onload = () => { if (!window.Lenis || isPhone()) return; lenis = new Lenis({ lerp: .085, smoothWheel: true, wheelMultiplier: 1, anchors: true }); const r = t => { lenis.raf(t); requestAnimationFrame(r); }; requestAnimationFrame(r); };
+  d.head.appendChild(s);
+}
+
+/* novubar */
+const stage = d.getElementById('stage'), story = d.getElementById('walk'), partners = d.getElementById('partners');
+let stop = 0;
+const absTop = el => el.getBoundingClientRect().top + scrollY;
+function next() {
+  const kb = d.getElementById('novubar'); kb.classList.add('hit'); setTimeout(() => kb.classList.remove('hit'), 140);
+  stop = (stop + 1) % 4;
+  const h = innerHeight;
+  goTo([0, absTop(story) + .02 * h, absTop(story) + 1.35 * h, absTop(partners)][stop]);
+}
+d.getElementById('novubar').onclick = next;
+addEventListener('keydown', e => {
+  if (e.code !== 'Space' || /INPUT|TEXTAREA|BUTTON|A|SELECT/.test(e.target.tagName)) return;
+  e.preventDefault(); next();
+});
+d.getElementById('rand').onclick = () => goTo(absTop(partners));
+d.getElementById('trailer').onclick = () => goTo(absTop(story) + 1.35 * innerHeight);
+
+/* partners */
+const P = [['Snowline', 'Puffer', 0, 0], ['Hush Hare', 'Leather', 1, 0], ['Night Bandit', 'Bomber', 2, 0], ['Hoot & Co', 'Tailoring', 0, 1], ['Axo Lab', 'Tech', 1, 1], ['Ember Knit', 'Knitwear', 2, 1]];
+const X = ['.15%', '50.07%', '99.94%'], Y = ['.2%', '99.7%'];
+const track = d.getElementById('track');
+track.innerHTML = [...P, ...P].map((p, i) => `<div class="card" role="img" aria-label="${p[0]}, ${p[1]}"><div class="art" style="background-position:${X[p[2]]} ${Y[p[3]]}"></div><div class="cap"><span>${p[0]}</span><span>0${i % 6 + 1} · ${p[1].toUpperCase()}</span></div></div>`).join('');
+const fill = d.getElementById('progFill');
+const prog = () => { const max = track.scrollWidth - track.clientWidth, vis = track.clientWidth / track.scrollWidth; fill.style.width = ((vis + (1 - vis) * (max ? track.scrollLeft / max : 0)) * 100) + '%'; };
+track.addEventListener('scroll', prog, { passive: true });
+let drift = !RM, dragging = false, sx = 0, sl = 0, fx = 0;
+const stopDrift = () => drift = false;
+['pointerdown', 'wheel', 'touchstart'].forEach(e => track.addEventListener(e, stopDrift, { passive: true }));
+track.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse') return; dragging = true; sx = e.clientX; sl = track.scrollLeft; track.classList.add('drag'); track.setPointerCapture(e.pointerId); });
+track.addEventListener('pointermove', e => { if (dragging) track.scrollLeft = sl - (e.clientX - sx); });
+track.addEventListener('pointerup', () => { dragging = false; track.classList.remove('drag'); });
+let tl = 0;
+const driftLoop = t => {
+  if (drift) {
+    const dt = tl ? t - tl : 16; const r = track.getBoundingClientRect();
+    if (r.top < innerHeight && r.bottom > 0) { fx += .03 * dt; const half = track.scrollWidth / 2; if (fx >= half) fx -= half; track.scrollLeft = fx; }
+  }
+  tl = t; if (drift) requestAnimationFrame(driftLoop);
+};
+requestAnimationFrame(driftLoop);
+
+/* scroll state */
+const wm = d.getElementById('wm');
+const p1 = d.querySelector('.p1'), p2 = d.querySelector('.p2'), dash = d.getElementById('dash'), fills = dash.querySelectorAll('b');
+function panel(el, a, dir) {
+  el.style.opacity = a;
+  const e = 1 - ease(a);
+  el.querySelectorAll('h2 .mask>span').forEach((s, i) => s.style.transform = `translateY(${e * (105 + i * 20)}%)`);
+  el.querySelector('p').style.transform = `translateY(${e * 24}px)`;
+  el.querySelector('.l').style.transform = `translateX(${e * 16 * dir}px)`;
+}
+function onScroll() {
+  const y = scrollY, h = innerHeight;
+  b.classList.toggle('scrolled', y > .35 * h);
+  b.classList.toggle('at-end', partners.getBoundingClientRect().top < .55 * h);
+  if (isPhone()) { wm.style.transform = ''; return; }
+  wm.style.transform = `translateY(${-40 * Math.min(1, y / h)}%)`;
+  const r = story.getBoundingClientRect(), p = clamp(-r.top / (r.height - h));
+  if (b.classList.contains('scene-on')) {
+    const a1 = clamp((p - .2) / .06) * (1 - clamp((p - .43) / .06)), a2 = clamp((p - .64) / .08);
+    panel(p1, a1, 1); panel(p2, a2, -1);
+    dash.classList.toggle('right', a1 >= a2);
+    dash.style.opacity = Math.max(a1, a2);
+    fills[0].style.transform = `scaleX(${clamp((p - .2) / .35)})`;
+    fills[1].style.transform = `scaleX(${clamp((p - .55) / .45)})`;
+  } else {
+    const first = p < .5;
+    p1.style.opacity = first ? 1 : 0; p2.style.opacity = first ? 0 : 1;
+    [p1, p2].forEach(el => el.querySelectorAll('h2 .mask>span,p,.l').forEach(s => s.style.transform = ''));
+    dash.classList.remove('right'); dash.style.opacity = 1;
+    fills[0].style.transform = `scaleX(${clamp(p / .5)})`; fills[1].style.transform = `scaleX(${clamp((p - .5) / .5)})`;
+  }
+}
+addEventListener('scroll', onScroll, { passive: true });
+addEventListener('resize', () => { setVW(); fit(); onScroll(); prog(); });
+
+/* scene: webp frame sequence on canvas */
+if (VIDEO) {
+  const N = 121, cv = d.getElementById('cv'), cx = cv.getContext('2d');
+  const imgs = new Array(N), edges = new Array(N), probe = d.createElement('canvas').getContext('2d', { willReadFrequently: true });
+  let cur = 0, last = '', started = false, lt = 0;
+  const src = i => `frames/f${String(i + 1).padStart(3, '0')}.webp`;
+  function edge(img) {
+    probe.canvas.width = 8; probe.canvas.height = 32;
+    probe.drawImage(img, 0, 0, 4, img.height, 0, 0, 4, 32); probe.drawImage(img, img.width - 4, 0, 4, img.height, 4, 0, 4, 32);
+    const px = probe.getImageData(0, 0, 8, 32).data, avg = o => { let r = 0, g = 0, b2 = 0, n = 0; for (let y = 0; y < 32; y++) for (let x = o; x < o + 4; x++) { const k = (y * 8 + x) * 4; r += px[k]; g += px[k + 1]; b2 += px[k + 2]; n++; } return `rgb(${r / n | 0},${g / n | 0},${b2 / n | 0})`; };
+    return [avg(0), avg(4)];
+  }
+  function load(i) {
+    if (imgs[i]) return;
+    const im = new Image(); im.decoding = 'async'; imgs[i] = im;
+    im.onload = () => { im.ok = true; try { edges[i] = edge(im); } catch (e) { edges[i] = ['#e9e6e1', '#e9e6e1']; } if (i === 0 && !started) start(); last = ''; };
+    im.src = src(i);
+  }
+  const order = []; [10, 5, 2, 1].forEach(s => { for (let i = 0; i < N; i += s) if (!order.includes(i)) order.push(i); });
+  let oi = 0; load(0);
+  const pump = () => { let k = 0; while (oi < order.length && k < 6) { load(order[oi++]); k++; } if (oi < order.length) setTimeout(pump, 60); };
+  function nearest(i) { for (let r = 0; r < N; r++) { if (imgs[i - r] && imgs[i - r].ok) return i - r; if (imgs[i + r] && imgs[i + r].ok) return i + r; } return -1; }
+  function size() { const dpr = Math.min(devicePixelRatio, 1.5); cv.width = Math.round(cv.clientWidth * dpr); cv.height = Math.round(cv.clientHeight * dpr); last = ''; }
+  function start() { started = true; size(); render(performance.now()); requestAnimationFrame(() => requestAnimationFrame(() => { b.classList.add('scene-on'); onScroll(); })); pump(); }
+  addEventListener('resize', size);
+  function rect(t) {
+    const W = cv.width, H = cv.height, ar = 1280 / 720;
+    const bh = Math.max(W * 900 / 1440, H), s0 = Math.max(W / 1280, bh / 720);
+    const r0 = [(W - 1280 * s0) / 2, 0, 1280 * s0, 720 * s0];
+    const r1 = [(W - H * ar) / 2, 0, H * ar, H];
+    return r0.map((v, k) => v + (r1[k] - v) * t);
+  }
+  function draw(im, e, r, alpha) {
+    cx.globalAlpha = alpha; cx.drawImage(im, r[0], r[1], r[2], r[3]);
+    if (alpha < 1 || !e) return;
+    const W = cv.width, f = r[2] * .06;
+    if (r[0] > 0) { const g = cx.createLinearGradient(r[0], 0, r[0] + f, 0); g.addColorStop(0, e[0]); g.addColorStop(1, 'rgba(0,0,0,0)'); cx.fillStyle = g; cx.fillRect(r[0], 0, f, cv.height); }
+    if (r[0] + r[2] < W) { const x = r[0] + r[2]; const g = cx.createLinearGradient(x, 0, x - f, 0); g.addColorStop(0, e[1]); g.addColorStop(1, 'rgba(0,0,0,0)'); cx.fillStyle = g; cx.fillRect(x - f, 0, f, cv.height); }
+  }
+  function render(t) {
+    const dt = lt ? t - lt : 16.7; lt = t;
+    const sr = stage.getBoundingClientRect(), P = clamp(-sr.top / (sr.height - innerHeight));
+    const target = Math.min(1, P / .85) * (N - 1);
+    const k = lenis ? .6 : .25;
+    cur += (target - cur) * (1 - Math.pow(1 - k, dt / 16.7));
+    if (Math.abs(target - cur) < .02) cur = target;
+    const onScreen = sr.bottom > 0;
+    if (onScreen) {
+      const i = Math.floor(cur), fr = +(cur - i).toFixed(2), tt = +ease(clamp((cur / (N - 1) - .35) / .55)).toFixed(3);
+      const a = nearest(i), bI = i + 1 < N && imgs[i + 1] && imgs[i + 1].ok && a === i ? i + 1 : -1;
+      const key = a + '|' + (bI < 0 ? 0 : fr) + '|' + tt + '|' + cv.width;
+      if (a >= 0 && key !== last) {
+        last = key; const r = rect(tt), e = edges[a];
+        cx.globalAlpha = 1;
+        cx.fillStyle = e ? e[0] : '#e9e6e1'; cx.fillRect(0, 0, cv.width / 2, cv.height);
+        cx.fillStyle = e ? e[1] : '#e9e6e1'; cx.fillRect(cv.width / 2, 0, cv.width / 2, cv.height);
+        draw(imgs[a], e, r, 1);
+        if (bI > 0 && fr > 0) draw(imgs[bI], null, r, fr);
+        cx.globalAlpha = 1;
+      }
+    }
+    requestAnimationFrame(render);
+  }
+}
+
+/* intro */
+function reveal() { if (b.classList.contains('ready')) return; b.classList.remove('pre'); b.classList.add('ready'); }
+function intro() {
+  fit(); onScroll(); prog();
+  if (RM || !b.animate) return reveal();
+  b.classList.remove('pre');
+  const E = { easing: 'cubic-bezier(.16,1,.3,1)', fill: 'backwards' }, anims = [];
+  const A = (el, kf, dur, delay) => anims.push(el.animate(kf, { ...E, duration: dur, delay }));
+  if (!VIDEO) A(d.getElementById('heroImg'), [{ opacity: 0, transform: 'scale(1.08)', filter: 'blur(10px)' }, { opacity: 1, transform: 'none', filter: 'blur(0)' }], 1800, 0);
+  d.querySelectorAll('.wm .ch').forEach((c, i) => A(c, [{ opacity: 0, transform: 'translateY(60%) rotate(4deg)' }, { opacity: 1, transform: 'none' }], 1100, 250 + i * 55));
+  d.querySelectorAll('.hero .copy .mask>span').forEach((c, i) => A(c, [{ opacity: 0, transform: 'translateY(100%)' }, { opacity: 1, transform: 'none' }], 900, 850 + i * 70));
+  A(d.querySelector('.tag'), [{ opacity: 0, transform: 'translateX(-20px)' }, { opacity: 1, transform: 'none' }], 900, 1300);
+  ['trailer', 'center', 'market', 'menuBtn'].forEach((id, i) => { const el = d.getElementById(id) || d.querySelector('.' + id); if (el) A(el, [{ opacity: 0, translate: '0 -24px' }, { opacity: 1, translate: '0 0' }], 900, 500 + i * 80); });
+  d.querySelectorAll('.bar>*').forEach((el, i) => A(el, [{ opacity: 0, translate: '0 24px' }, { opacity: 1, translate: '0 0' }], 900, 700 + i * 80));
+  Promise.all(anims.map(a => a.finished)).then(() => { anims.forEach(a => a.cancel()); reveal(); }).catch(reveal);
+  setTimeout(reveal, 4000);
+}
+setTimeout(() => { b.classList.remove('pre'); b.classList.add('ready'); }, 6000);
+(d.fonts && d.fonts.ready ? Promise.race([d.fonts.ready, new Promise(r => setTimeout(r, 2500))]) : Promise.resolve()).then(intro);
+})();
+</script>
+</body>
+</html>
