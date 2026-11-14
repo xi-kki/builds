@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>vela — in your terms</title>
+<meta name="description" content="Vela is a secure messaging app, crypto wallet, and Web3 browser built with state of the art technology.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 10 10%27%3E%3Ccircle cx=%275%27 cy=%275%27 r=%274%27/%3E%3C/svg%3E">
+<link rel="preload" href="fonts/intertight.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="img/message.webp" as="image">
+<style>
+@font-face{font-family:"Inter Tight";src:url(fonts/intertight.woff2) format("woff2");font-weight:100 900;font-display:swap}
+:root{--ink:#0D0D0C;--ink56:rgba(13,13,12,.56);--ink42:rgba(13,13,12,.42);--cream:#FBF6EF;--u:min(calc(100vw/1440),calc(100vh/960))}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:"Inter Tight",system-ui,sans-serif;color:var(--ink);background:var(--cream);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a,button{color:inherit;font:inherit;text-decoration:none;background:none;border:0;cursor:pointer}
+
+.page{height:100vh;min-height:560px;display:flex;flex-direction:column}
+.hero{position:relative;flex:0 0 75%;overflow:hidden;isolation:isolate}
+.bg{position:absolute;inset:-6%;z-index:-2}
+.bg i{position:absolute;inset:0;opacity:0;will-change:opacity,transform;transform:scale(1.08)}
+.bg i:nth-child(1){background:radial-gradient(60% 70% at 86% 76%,rgba(246,222,104,.75),transparent 70%),radial-gradient(45% 50% at 32% 105%,rgba(246,222,104,.35),transparent 70%),linear-gradient(#F2ECDF,#F4EBC6)}
+.bg i:nth-child(2){background:radial-gradient(60% 70% at 86% 76%,rgba(249,150,84,.7),transparent 70%),radial-gradient(45% 50% at 32% 105%,rgba(249,150,84,.35),transparent 70%),linear-gradient(#F8DCC7,#F9CBA9)}
+.bg i:nth-child(3){background:radial-gradient(60% 70% at 86% 76%,rgba(150,206,150,.7),transparent 70%),radial-gradient(45% 50% at 32% 105%,rgba(150,206,150,.35),transparent 70%),linear-gradient(#E9EBE0,#DFE9D4)}
+.bg i:nth-child(4){background:radial-gradient(60% 70% at 86% 76%,rgba(222,150,200,.7),transparent 70%),radial-gradient(45% 50% at 32% 105%,rgba(222,150,200,.35),transparent 70%),linear-gradient(#F0E4E6,#ECD6E2)}
+.grain{position:absolute;inset:0;z-index:-1;opacity:.18;mix-blend-mode:multiply;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+.nav{height:calc(80*var(--u));min-height:56px;display:flex;align-items:center;padding:0 calc(112*var(--u));border-bottom:1px solid rgba(13,13,12,.12)}
+.logo{display:flex;align-items:center;gap:calc(10*var(--u));font-weight:600;font-size:max(18px,calc(25*var(--u)));letter-spacing:-.02em}
+.logo::before{content:"";width:max(10px,calc(13*var(--u)));height:max(10px,calc(13*var(--u)));border-radius:50%;background:var(--ink)}
+.links{margin-left:auto;display:flex;align-items:center;gap:calc(42*var(--u));font-size:max(14px,calc(17*var(--u)));font-weight:500}
+.links a{display:flex;align-items:center;gap:6px;min-height:40px}
+.links a svg{width:.6em;height:.6em}
+.join{height:max(40px,calc(48*var(--u)));padding:0 calc(22*var(--u));border:1.4px solid var(--ink);border-radius:calc(7*var(--u));display:inline-flex;align-items:center;font-weight:500;transition:background .25s,color .25s}
+.join:hover{background:var(--ink);color:#fff}
+
+h1{position:absolute;left:calc(112*var(--u));top:calc(190*var(--u));font-size:calc(172*var(--u));line-height:.86;letter-spacing:-.032em;font-weight:500}
+.l1{display:block;position:relative;height:.86em;white-space:nowrap}
+.l2{display:block}
+.w{position:absolute;left:0;top:-.12em;display:inline-flex;align-items:center;gap:.08em;opacity:0;will-change:transform,opacity,filter}
+.ic{position:relative;width:1.02em;height:1.02em;flex:none;isolation:isolate;will-change:transform}
+.ic img{width:100%;height:100%;display:block;filter:grayscale(1) brightness(1.1) contrast(1.08)}
+.ic::after{content:"";position:absolute;inset:0;background:var(--tint);mix-blend-mode:color;-webkit-mask:var(--m) center/contain no-repeat;mask:var(--m) center/contain no-repeat}
+
+.row{position:absolute;left:calc(112*var(--u));top:calc(578*var(--u));display:flex;align-items:center;gap:calc(14*var(--u))}
+.store{height:max(44px,calc(58*var(--u)));padding:0 calc(22*var(--u));border:1.4px solid var(--ink);border-radius:calc(10*var(--u));display:inline-flex;align-items:center;gap:calc(10*var(--u));font-size:max(14px,calc(17*var(--u)));font-weight:500;transition:background .35s,color .35s}
+.store svg{width:1.25em;height:1.25em}
+.store:hover,.store.fill{background:var(--ink);color:#fff}
+.cap{margin-left:calc(26*var(--u));font-size:max(13px,calc(18.5*var(--u)));line-height:1.35;color:var(--ink56)}
+
+.strip{position:relative;flex:1;background:var(--cream);padding:calc(40*var(--u)) calc(112*var(--u)) 0;display:flex;align-items:flex-start;gap:calc(70*var(--u))}
+.notch{position:absolute;left:0;right:0;bottom:100%;height:calc(62*var(--u));width:100%;display:block}
+.hint{position:absolute;right:calc(112*var(--u));bottom:calc(100% + 18*var(--u));font-size:max(12px,calc(15*var(--u)));color:var(--ink42);z-index:1}
+.alone{font-size:calc(29*var(--u));font-weight:500;line-height:1.15;letter-spacing:-.01em;width:calc(260*var(--u));flex:none}
+.stat b{display:block;font-size:calc(54*var(--u));font-weight:500;letter-spacing:-.03em;line-height:1}
+.stat span{display:block;margin-top:calc(10*var(--u));font-size:max(12px,calc(16.5*var(--u)));color:var(--ink56)}
+.sprout{margin-left:auto;width:calc(110*var(--u));height:calc(110*var(--u));flex:none}
+
+@media (max-width:760px){
+  .page{height:auto;min-height:0}
+  .hero{flex:none;padding-bottom:64px}
+  .nav{padding:0 18px}.links>a:not(.join){display:none}.join{padding:0 16px;border-radius:8px}
+  h1{position:relative;left:auto;top:auto;margin:48px 18px 0;font-size:clamp(52px,15.5vw,88px)}
+  .row{position:relative;left:auto;top:auto;margin:32px 18px 0;flex-wrap:wrap;gap:10px}
+  .store{border-radius:10px;padding:0 16px}
+  .cap{margin:8px 0 0;flex-basis:100%;font-size:15px}.cap br{display:none}
+  .strip{flex-wrap:wrap;padding:28px 18px 40px;gap:26px 18px}
+  .notch{height:28px}.hint{right:18px;bottom:calc(100% + 6px);font-size:12px}
+  .alone{width:100%;font-size:24px}
+  .stat{flex:0 0 calc(50% - 9px)}.stat b{font-size:34px}.stat span{font-size:13px;margin-top:6px}
+  .sprout{width:72px;height:72px}
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <section class="hero" aria-label="Vela">
+    <div class="bg" id="bg" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <div class="grain" aria-hidden="true"></div>
+    <header class="nav">
+      <a class="logo" href="#">vela</a>
+      <nav class="links">
+        <a href="#">Products<svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 4l3 3 3-3"/></svg></a>
+        <a href="#">Company<svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 4l3 3 3-3"/></svg></a>
+        <a href="#">Docs<svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 4l3 3 3-3"/></svg></a>
+        <a class="join" href="#">Join Vela</a>
+      </nav>
+    </header>
+    <h1 aria-label="Message, browse, transact, build web — in your terms">
+      <span class="l1" id="slot" aria-hidden="true"></span>
+      <span class="l2" aria-hidden="true">in your terms</span>
+    </h1>
+    <div class="row">
+      <a class="store" id="appstore" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 7.5c1.4-1.6 3.4-1.8 4.6-1 1 .6 1.6 1.4 1.9 2-2 1-2.5 4.2.2 5.6-.7 2.2-2.4 4.9-4 4.9-1.2 0-1.6-.7-2.8-.7s-1.7.7-2.8.7C7.2 19 5 15.4 5 12.3 5 9.1 7 7.2 9.1 7.2c1.1 0 2 .3 2.9.3z"/><path d="M12.2 6.8c-.1-1.6 1-3.1 2.6-3.3"/></svg>App Store</a>
+      <a class="store" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M6 4.5v15l13-7.5z"/></svg>Google Play</a>
+      <p class="cap">Vela is a secure messaging app, crypto wallet, and <br>Web3 browser built with state of the art technology.</p>
+    </div>
+  </section>
+  <section class="strip">
+    <svg class="notch" viewBox="0 0 1440 62" preserveAspectRatio="none" aria-hidden="true"><path fill="#FBF6EF" d="M0 62 H1062 C1092 62 1098 54 1116 34 C1138 9 1146 1 1178 1 H1440 V62 Z"/></svg>
+    <span class="hint">↓ Scroll to learn more</span>
+    <p class="alone">Nothing great is<br>made alone</p>
+    <div class="stat"><b>11.5M+</b><span>Active accounts</span></div>
+    <div class="stat"><b>$0.0002</b><span>Average cost per transaction</span></div>
+    <div class="stat"><b>80+</b><span>Dapps integrations</span></div>
+    <svg class="sprout" viewBox="0 0 100 100" fill="none" stroke="#0D0D0C" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><path d="M50 88V48"/><path d="M50 60C50 44 38 36 24 38c0 14 12 22 26 22z"/><path d="M50 50c0-14 10-22 24-22 0 14-10 22-24 22z"/><path d="M28 88h44"/></svg>
+  </section>
+</div>
+<script>
+(() => {
+  const W = [['Message', 'message', '#E9C22E'], ['Browse', 'browse', '#F2772F'], ['Transact', 'transact', '#3FB874'], ['Build web', 'build', '#C564C4']];
+  const slot = document.getElementById('slot'), layers = [...document.getElementById('bg').children], app = document.getElementById('appstore');
+  slot.innerHTML = W.map(([w, f, c]) => `<span class="w"><span class="ic" style="--tint:${c};--m:url(img/${f}.webp)"><img src="img/${f}.webp" alt="" width="320" height="320" decoding="async"></span>${w}</span>`).join('');
+  const words = [...slot.children], icons = words.map(w => w.firstElementChild);
+  const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const S = 1.75, N = 4, ENTER = .5, LEAVE = .42, XF = .77;
+  const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+  const eo = t => 1 - Math.pow(1 - t, 3), ei = t => t * t * t;
+
+  if (RM) {
+    words[1].style.opacity = 1; layers[1].style.opacity = 1; return;
+  }
+  /* one clock: a long Web Animation whose currentTime everything reads */
+  const clock = document.body.animate([{ opacity: 1 }, { opacity: 1 }], { duration: 1e9 });
+  document.addEventListener('visibilitychange', () => document.hidden ? clock.pause() : clock.play());
+  const prev = new Array(N).fill('');
+  function frame() {
+    const t = (clock.currentTime || 0) / 1000, cyc = t / S, idx = Math.floor(cyc) % N, local = t - Math.floor(cyc) * S;
+    for (let i = 0; i < N; i++) {
+      let css = 'opacity:0';
+      if (i === idx) {
+        const a = clamp(local / ENTER), b = clamp((local - (S - LEAVE)) / LEAVE);
+        const e = eo(a), l = ei(b);
+        const op = e * (1 - l), y = (1 - e) * .32 - l * .16, blur = (1 - e) * 10 + l * 8, sc = .96 + .04 * e;
+        css = `opacity:${op.toFixed(3)};transform:translate3d(0,${y.toFixed(4)}em,0) scale(${sc.toFixed(4)})` + (blur > .05 ? `;filter:blur(${blur.toFixed(2)}px)` : '');
+        const ai = eo(clamp((local - .06) / ENTER)), bob = Math.sin(t * 2.2) * .028, rot = Math.sin(t * 1.7) * 3;
+        icons[i].style.transform = `translate3d(0,${bob.toFixed(4)}em,0) rotate(${(rot - 14 * (1 - ai)).toFixed(2)}deg) scale(${(.7 + .3 * ai).toFixed(4)})`;
+      }
+      if (css !== prev[i]) { words[i].style.cssText = css; prev[i] = css; }
+    }
+    /* panel crossfade straddling each change */
+    const toNext = S - local, sinceStart = local;
+    let wNext = 0, wPrev = 0;
+    if (toNext < XF / 2) wNext = .5 * (1 - toNext / (XF / 2));
+    if (sinceStart < XF / 2) wPrev = .5 * (1 - sinceStart / (XF / 2));
+    const op = new Array(N).fill(0);
+    op[idx] = 1 - wNext - wPrev; op[(idx + 1) % N] += wNext; op[(idx + N - 1) % N] += wPrev;
+    const dx = Math.sin(t * .23) * 2.2, dy = Math.cos(t * .19) * 1.6;
+    layers.forEach((L, i) => { L.style.opacity = op[i].toFixed(3); if (op[i] > 0) L.style.transform = `translate3d(${dx.toFixed(2)}%,${dy.toFixed(2)}%,0) scale(1.08)`; });
+    /* App Store flash during Build web hold */
+    app.classList.toggle('fill', idx === 3 && local > ENTER + .1 && local < S - LEAVE - .1);
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
